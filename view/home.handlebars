@@ -1,0 +1,16 @@
+<section class="container">
+    <h3 class="gallery-name">What's on everyone's mind?</h3>
+    <section class="flex-row justify-center">
+      {{#each post.post_body as |Post|}}
+      <section class="card">
+          <header>{{post_title}}</header>
+  
+          <div class="card-body">
+            <p>{{post_body}}</p>
+            <p>By: {{user.username}}</p>
+          </div>
+        </a>
+      </section>
+      {{/each}}
+    </section>
+  </section>
