@@ -8,11 +8,11 @@ router.get('/', withAuth, async (req, res) => {
   try {
     const dbPosts = await Post.findAll({
         where: { user_id: req.session_user_id},
-        attributes: ['id, post_title, post_body'],
+        attributes: ['id', 'post_title', 'post_body'],
         include: [
         {
           model: Comment,
-          attributes: ['id, comment_body, user_id, post_id'],
+          attributes: ['id', 'comment_body', 'user_id', 'post_id'],
           include: {
             model: User,
             attributes: ['username']
@@ -20,7 +20,7 @@ router.get('/', withAuth, async (req, res) => {
         },
         {
             model: User,
-            attributes: ['name']
+            attributes: ['username']
         },
       ],
     });

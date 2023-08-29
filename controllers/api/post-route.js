@@ -7,12 +7,12 @@ const sequelize = require('../../config/connection');
 router.get('/', async (req, res) => {
     try {
       const dbPosts = await Post.findAll({
-          attributes: ['id, post_title, post_body'],
+          attributes: ['id', 'post_title', 'post_body'],
           order: [['id', 'DESC']],
           include: [
           {
             model: Comment,
-            attributes: ['id, comment_body, user_id, post_id'],
+            attributes: ['id', 'comment_body', 'user_id', 'post_id'],
             include: {
               model: User,
               attributes: ['username']
@@ -20,10 +20,12 @@ router.get('/', async (req, res) => {
           },
           {
               model: User,
-              attributes: ['name']
+              attributes: ['username']
           },
         ],
       });
+
+      res.json(dbPosts);
   
     } catch (err) {
       console.log(err);
@@ -36,12 +38,12 @@ router.get('/', async (req, res) => {
     try {
       const dbPosts = await Post.findOne({
         where: {id: req.params.id},  
-        attributes: ['id, post_title, post_body'],
+        attributes: ['id', 'post_title', 'post_body'],
           order: [['id', 'DESC']],
           include: [
           {
             model: Comment,
-            attributes: ['id, comment_body, user_id, post_id'],
+            attributes: ['id', 'comment_body', 'user_id', 'post_id'],
             include: {
               model: User,
               attributes: ['username']
